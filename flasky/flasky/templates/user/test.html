@@ -1,0 +1,8 @@
+{% extends "common/base.html" %}
+{% block title %}Flask{% endblock %}
+{% block page_content %}
+<div class="page-header">
+    <p> The local data and time is {{ moment(current_time).format('LLL')}}</p>
+    <p> That was {{ moment(current_time).fromNow(refresh=True) }}</p>
+</div>
+{% endblock %}

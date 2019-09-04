@@ -1,0 +1,6 @@
+Dear {{user.username}}
+Welcome to Flask
+To confirm you account please click on the following link:
+{{url_for('user.confirm',token=token,_external=True)}}
+Sincerely,
+The Flasky Team
