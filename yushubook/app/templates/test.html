@@ -1,0 +1,25 @@
+{% extends 'layout.html' %} {#模板继承#}
+{% block content %}
+    {{ super() }} {#同时继承父模板里的内容#}
+    {{ data.name }}
+
+    {% if data.age >28 %}
+        {{ data.name }}
+        <ul>test</ul>
+    {% elif data.age ==28 %}
+        do something
+        {{ data.test|default('未名') }}{#过滤器 管道命令#}
+    {% else %}
+        {{ data.age }}
+    {% endif %}
+
+    {% for foo in [1,2,3,4,5] %}
+        {{ foo }}
+    {% endfor %}
+
+    {% for key,value in data.items() %}
+        {{ key }}
+        {{ value }}
+    {% endfor %}
+{% endblock %}
+{# jinja2 #}
