@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://mirrors.aliyun.com/pypi/simple"
+verify_ssl = true
+
+[dev-packages]
+watchdog = "*"
+
+[packages]
+flask = "*"
+flask-mail = "*"
+flask-moment = "*"
+flask-sqlalchemy = "*"
+bootstrap-flask = "*"
+flask-ckeditor = "*"
+flask-login = "*"
+flask-debugtoolbar = "*"
+python-dotenv = "*"
+flask-migrate = "*"
+flask-wtf = "*"
+faker = "*"
+pipfile = "*"
+
+[requires]
+python_version = "3.6"

@@ -1,0 +1,6 @@
+.idea
+*.iml
+
+*.pyc
+data-dev.db
+Pipfile.lock
