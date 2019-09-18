@@ -18,7 +18,10 @@ class BaseConfig:
 
 
 class DevelopmentConfig(BaseConfig):
-    pass
+    MONGO_HOST = "localhost"
+    MONGO_PORT = "27017"
+    MONGO_DBNAME = "pmdb_dev"
+    MONGO_URI = "mongodb://localhost:27017/pmdb_dev"
 
 
 class TestingConfig(BaseConfig):
