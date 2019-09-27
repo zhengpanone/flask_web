@@ -4,10 +4,10 @@
 """
 Author:zhengpanone
 Email:zhengpanone@hotmail.com
-date:2019/9/6 9:12
+date:2019/9/25 11:17
 """
 
 # import lib
-from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
+pm_bp = Bl
+

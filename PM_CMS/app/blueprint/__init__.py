@@ -4,12 +4,11 @@
 """
 Author:zhengpanone
 Email:zhengpanone@hotmail.com
-date:2019/9/6 9:34
+date:2019/9/27 14:25
 """
 
 # import lib
 
 from flask import Blueprint
 
-pm = Blueprint('pm', __name__)
-from app.pm import views
+pm_bp = Blueprint('pm', __name__)

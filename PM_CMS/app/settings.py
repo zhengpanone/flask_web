@@ -12,16 +12,16 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
 class BaseConfig:
     SECRET_KEY = os.getenv("SECRET_KEY", "adsfdf")
 
 
 class DevelopmentConfig(BaseConfig):
-    MONGO_HOST = "localhost"
-    MONGO_PORT = "27017"
-    MONGO_DBNAME = "pmdb_dev"
-    MONGO_URI = "mongodb://localhost:27017/pmdb_dev"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:root@127.0.0.1:3306/pm_dev"
+    SQLALCHEMY_ECHO = True
 
 
 class TestingConfig(BaseConfig):
