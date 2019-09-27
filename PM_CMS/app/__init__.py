@@ -24,6 +24,7 @@ def create_app(config_name=None):
     app.config.from_object(config[config_name])
     register_extensions(app)
     register_blueprints(app)
+    register_redprints(app)
     with app.app_context():
         db.create_all()
     return app
@@ -35,7 +36,12 @@ def register_extensions(app):
 
 def register_blueprints(app):
     from app.blueprint import pm_bp
-    app.register_blueprint(pm_bp, url_prefix='/pm')
+    app.register_blueprint(pm_bp)
+
+
+def register_redprints(app):
+    from app.api.v01 import create_blueprint_v1
+    app.register_blueprint(create_blueprint_v1(), url_prefix="/v1")
 
 
 def register_logging(app):

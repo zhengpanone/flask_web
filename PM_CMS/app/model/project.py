@@ -11,6 +11,7 @@ date:2019/9/6 10:00
 from enum import Enum
 
 from app.extensions import db
+from app.model.base import Base
 
 
 class SeqPlatform(Enum):
@@ -19,7 +20,7 @@ class SeqPlatform(Enum):
     XTEN = 3
 
 
-class Project(db.Model):
+class Project(Base):
     id = db.Column(db.Integer, primary_key=True, comment="ID")
     project_name = db.Column(db.String(80), comment="任务单名称")
     sample_name = db.Column(db.String(80), comment="样本名称")

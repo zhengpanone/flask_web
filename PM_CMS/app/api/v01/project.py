@@ -8,4 +8,11 @@ date:2019/9/27 14:16
 """
 
 # import lib
+from app.libs.redprint import RedPrint
 
+api = RedPrint('project')
+
+
+@api.route("/")
+def index():
+    return "I am API"

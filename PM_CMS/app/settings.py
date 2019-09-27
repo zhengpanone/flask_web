@@ -9,19 +9,21 @@ date:2019/9/6 9:15
 
 # import lib
 import os
+import mysql.connector
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-
-SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class BaseConfig:
     SECRET_KEY = os.getenv("SECRET_KEY", "adsfdf")
 
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_COMMIT_TEARDOWN = True
+
 
 class DevelopmentConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:root@127.0.0.1:3306/pm_dev"
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:root@127.0.0.1:3306/pm_dev"
+    # SQLALCHEMY_ECHO = True
 
 
 class TestingConfig(BaseConfig):
