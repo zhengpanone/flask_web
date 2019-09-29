@@ -17,11 +17,11 @@ class APIException(HTTPException):
     msg = 'sorry , we make a mistake !'
     error_code = 999  # 未知错误
 
-    def __init__(self, msg=None, code=None, err0r_code=None):
+    def __init__(self, msg=None, code=None, error_code=None):
         if code:
             self.code = code
-        if err0r_code:
-            self.error_code = code
+        if error_code:
+            self.error_code = error_code
         if msg:
             self.msg = msg
         super(APIException, self).__init__(msg, None)
