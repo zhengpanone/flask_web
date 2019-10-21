@@ -14,6 +14,7 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
 
 from app.extensions import db
+from app.libs.error_code import NotFound
 
 
 class SQLAlchemy(_SQLAlchemy):
@@ -33,6 +34,18 @@ class Query(BaseQuery):
             kwargs['status'] = 1
         return super(Query, self).filter_by(**kwargs)
 
+    def get_or_404(self, ident, description=None):
+        rv = self.get(ident)
+        if not rv:
+            raise NotFound()
+        return rv
+
+    def first_or_404(self, description=None):
+        rv = self.first()
+        if not rv:
+            raise NotFound(msg=description)
+        return rv
+
 
 db = SQLAlchemy(query_class=Query)
 
@@ -44,6 +57,9 @@ class Base(db.Model):
 
     def __init__(self):
         self.create_time = int(datetime.now().timestamp())
+
+    def __getitem__(self, item):
+        return getattr(self, item)
 
     @property
     def create_datetime(self):

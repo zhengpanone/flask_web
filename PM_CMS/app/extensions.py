@@ -10,4 +10,5 @@ date:2019/9/6 9:12
 # import lib
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()

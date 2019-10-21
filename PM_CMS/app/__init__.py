@@ -10,13 +10,28 @@ date:2019/9/6 9:06
 # import lib
 import os
 
-from flask import Flask
+from datetime import date
+from flask import Flask as _Flask
+from flask.json import JSONEncoder as _JSONEncoder
 from werkzeug.exceptions import HTTPException
 
-from app.extensions import db
+from app.model.base import db
 from app.libs.error import APIException
 from app.libs.error_code import ServerError
 from app.settings import config
+
+
+class JSONEncoder(_JSONEncoder):
+    def default(self, o):
+        if hasattr(o, 'keys') and hasattr(o, '__getitem__'):
+            return dict(o)
+        if isinstance(o, date):
+            return o.strftime('%Y-%m-%d')
+        raise ServerError()
+
+
+class Flask(_Flask):
+    json_encoder = JSONEncoder
 
 
 def create_app(config_name=None):
@@ -29,6 +44,7 @@ def create_app(config_name=None):
     register_blueprints(app)
     register_redprints(app)
     register_error(app)
+    register_commands(app)
     with app.app_context():
         db.create_all()
     return app
@@ -67,3 +83,8 @@ def register_error(app):
 
 def register_logging(app):
     pass
+
+
+def register_commands(app):
+    from app.commands import register_init_commands
+    register_init_commands(app)

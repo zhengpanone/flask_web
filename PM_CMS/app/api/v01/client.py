@@ -8,7 +8,6 @@ date:2019/9/27 15:19
 """
 
 # import lib
-from flask import request
 
 from app.libs.enums import ClientTypeEnum
 from app.libs.error_code import Success
@@ -22,7 +21,6 @@ api = RedPrint('client')
 @api.route('/register', methods=['POST'])
 def create_client():
     # request.args.to_dict()
-    1 / 0
     form = ClientForm().validate_for_api()
     promise = {
         ClientTypeEnum.USER_EMAIL: __register_user_by_email,
