@@ -24,5 +24,5 @@ class RedPrint:
             url_prefix = '/' + self.name
         for f, rule, options in self.mound:
             # 取字典的value 当key为endpoint,如不存在则取f.__name__ 视图函数的名字
-            endpoint = options.pop("endpoint", f.__name__)
+            endpoint = self.name + '+' + options.pop("endpoint", f.__name__)
             bp.add_url_rule(url_prefix + rule, endpoint, f, **options)

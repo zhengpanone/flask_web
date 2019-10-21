@@ -22,6 +22,7 @@ class BaseConfig:
 
 
 class DevelopmentConfig(BaseConfig):
+    TOKEN_EXPIRATION = 30 * 24 * 3600
     SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:root@127.0.0.1:3306/pm_dev"
     # SQLALCHEMY_ECHO = True
 
