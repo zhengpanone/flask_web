@@ -8,6 +8,11 @@ verify_ssl = true
 [packages]
 flask = "*"
 flask-pymongo = "*"
+flask-sqlalchemy = "*"
+mysql-connector = "*"
+wtforms = "*"
+python-dotenv = "*"
+flask-httpauth = "*"
 
 [requires]
 python_version = "3.6"
