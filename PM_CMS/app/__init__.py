@@ -8,9 +8,12 @@ date:2019/9/6 9:06
 """
 
 # import lib
+import logging.config
 import os
 
 from datetime import date
+
+import yaml
 from flask import Flask as _Flask
 from flask.json import JSONEncoder as _JSONEncoder
 from werkzeug.exceptions import HTTPException
@@ -45,6 +48,7 @@ def create_app(config_name=None):
     register_redprints(app)
     register_error(app)
     register_commands(app)
+    register_logging(app)
     with app.app_context():
         db.create_all()
     return app
@@ -82,7 +86,11 @@ def register_error(app):
 
 
 def register_logging(app):
-    pass
+    if not os.path.exists(app.config['LOGGING_PATH']):
+        os.mkdir(app.config['LOGGING_PATH'])
+    with open(app.config['LOGGING_CONFIG_PATH'], 'r', encoding='utf-8') as f:
+        dict_conf = yaml.safe_load(f.read())
+    logging.config.dictConfig(dict_conf)  # 载入日志配置
 
 
 def register_commands(app):

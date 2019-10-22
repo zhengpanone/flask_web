@@ -19,6 +19,8 @@ class BaseConfig:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_COMMIT_TEARDOWN = True
+    LOGGING_CONFIG_PATH = os.path.join(basedir, './app/config/logging.yaml')
+    LOGGING_PATH = os.path.join(basedir, './logs')
 
 
 class DevelopmentConfig(BaseConfig):
