@@ -8,11 +8,17 @@ date:2019/9/27 14:16
 """
 
 # import lib
+from flask import jsonify
+
 from app.libs.redprint import RedPrint
+from app.model.response import ResMsg
 
 api = RedPrint('project')
 
 
 @api.route("/")
 def index():
-    return "I am API"
+    res = ResMsg()
+    test_dict = dict(name="张三", age=18)
+    res.update(data=test_dict)
+    return jsonify(res.data)

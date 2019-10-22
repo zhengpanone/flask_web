@@ -37,12 +37,20 @@ class Flask(_Flask):
     json_encoder = JSONEncoder
 
 
+def read_yaml(yaml_file_path):
+    with open(yaml_file_path, 'rb') as f:
+        cf = yaml.safe_load(f.read())
+    return cf
+
+
 def create_app(config_name=None):
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')
 
     app = Flask("app")
     app.config.from_object(config[config_name])
+    cf = read_yaml(app.config['MSG_PATH'])
+    app.config.update(cf)
     register_extensions(app)
     register_blueprints(app)
     register_redprints(app)
