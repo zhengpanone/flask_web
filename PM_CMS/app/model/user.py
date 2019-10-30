@@ -16,7 +16,6 @@ from app.model.base import Base, db
 
 
 class User(Base):
-    id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(24), unique=True, nullable=False, comment="邮箱")
     nickname = db.Column(db.String(24), unique=True, comment="昵称")
     auth = db.Column(db.SmallInteger, default=1, comment="用户角色")

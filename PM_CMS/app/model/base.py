@@ -52,8 +52,9 @@ db = SQLAlchemy(query_class=Query)
 
 class Base(db.Model):
     __abstract__ = True
-    create_time = db.Column(db.Integer)
-    status = db.Column(db.SmallInteger, default=1)
+    id = db.Column(db.Integer, primary_key=True, comment="ID")
+    create_time = db.Column(db.Integer, comment="创建时间")
+    status = db.Column(db.SmallInteger, default=1, comment="状态")
 
     def __init__(self):
         self.create_time = int(datetime.now().timestamp())

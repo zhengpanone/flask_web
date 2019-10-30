@@ -24,30 +24,38 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.cs',
                             'rel': 'icon'
                         }
                         ]
+
+
+
+
 app = dash.Dash(__name__, assets_folder=assert_folder, external_stylesheets=external_stylesheets)
 
 all_data = [np.random.normal(0, std, 100) for std in range(6, 10)]
 
+
+
 df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-app.layout = html.Div(children=[
-    html.H1(children="Hello Dash"),
-    html.Div(children="""
-                                Dash: A web application framework for python
-                                """),
-    dcc.Graph(id='example-graph',
-              figure={
-                  'data': [
+@app.routes("/")
+def index():
+    app.layout = html.Div(children=[
+        html.H1(children="Hello Dash"),
+        html.Div(children="""
+                                    Dash: A web application framework for python
+                                    """),
+        dcc.Graph(id='example-graph',
+                  figure={
+                      'data': [
 
-                      go.Violin(y=df['total_bill'], box_visible=True, line_color='black',
-                                meanline_visible=True, fillcolor='lightseagreen', opacity=0.6,
-                                x0='Total Bill')
+                          go.Violin(y=df['total_bill'], box_visible=True, line_color='black',
+                                    meanline_visible=True, fillcolor='lightseagreen', opacity=0.6,
+                                    x0='Total Bill')
 
-                  ],
-                  'layout': {
-                      'title': 'Dash Data Visualization'
-                  }
-              })])
+                      ],
+                      'layout': {
+                          'title': 'Dash Data Visualization'
+                      }
+                  })])
 
 if __name__ == '__main__':
     app.run_server(debug=True)
