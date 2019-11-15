@@ -13,6 +13,12 @@ mysql-connector = "*"
 wtforms = "*"
 python-dotenv = "*"
 flask-httpauth = "*"
+flask-migrate = "*"
+xlwings = "*"
+xlrd = "*"
+coverage = "*"
+flask-dropzone = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.6"

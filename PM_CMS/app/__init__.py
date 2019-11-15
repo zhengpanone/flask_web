@@ -11,30 +11,17 @@ date:2019/9/6 9:06
 import logging.config
 import os
 
-from datetime import date
-
 import yaml
-from flask import Flask as _Flask
-from flask.json import JSONEncoder as _JSONEncoder
+from flask import Flask
 from werkzeug.exceptions import HTTPException
 
-from app.model.base import db
+from app.extensions import migrate, dropzone
+from app.libs.core import JSONEncoder
 from app.libs.error import APIException
 from app.libs.error_code import ServerError
+from app.model import user, project
+from app.model.base import db
 from app.settings import config
-
-
-class JSONEncoder(_JSONEncoder):
-    def default(self, o):
-        if hasattr(o, 'keys') and hasattr(o, '__getitem__'):
-            return dict(o)
-        if isinstance(o, date):
-            return o.strftime('%Y-%m-%d')
-        raise ServerError()
-
-
-class Flask(_Flask):
-    json_encoder = JSONEncoder
 
 
 def read_yaml(yaml_file_path):
@@ -47,7 +34,10 @@ def create_app(config_name=None):
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')
 
-    app = Flask("app")
+    # app = Flask("app")
+    app = Flask(__name__)
+    # 返回json格式转换
+    app.json_encoder = JSONEncoder
     app.config.from_object(config[config_name])
     cf = read_yaml(app.config['MSG_PATH'])
     app.config.update(cf)
@@ -55,6 +45,7 @@ def create_app(config_name=None):
     register_blueprints(app)
     register_redprints(app)
     register_error(app)
+    register_shell_context(app)
     register_commands(app)
     register_logging(app)
     with app.app_context():
@@ -64,6 +55,8 @@ def create_app(config_name=None):
 
 def register_extensions(app):
     db.init_app(app)
+    migrate.init_app(app, db)
+    dropzone.init_app(app)
 
 
 def register_blueprints(app):
@@ -91,6 +84,15 @@ def register_error(app):
                 return ServerError()
             else:
                 raise e
+
+
+def register_shell_context(app):
+    """注册shell上下文处理函数
+    """
+
+    @app.shell_context_processor
+    def make_shell_context():
+        return dict(db=db, model=[user, project])
 
 
 def register_logging(app):

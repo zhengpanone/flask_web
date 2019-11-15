@@ -16,12 +16,14 @@ basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 class BaseConfig:
     SECRET_KEY = os.getenv("SECRET_KEY", "adsfdf")
+    JSON_AS_ASCII = False
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_COMMIT_TEARDOWN = True
     LOGGING_CONFIG_PATH = os.path.join(basedir, './app/config/logging.yaml')
     LOGGING_PATH = os.path.join(basedir, './logs')
     MSG_PATH = os.path.join(basedir, './app/config/msg.yaml')
+    UPLOAD_PATH = os.path.join(basedir, 'uploads')
 
 
 class DevelopmentConfig(BaseConfig):
