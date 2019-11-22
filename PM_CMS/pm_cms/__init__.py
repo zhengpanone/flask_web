@@ -15,13 +15,13 @@ import yaml
 from flask import Flask
 from werkzeug.exceptions import HTTPException
 
-from app.extensions import migrate, dropzone
-from app.libs.core import JSONEncoder
-from app.libs.error import APIException
-from app.libs.error_code import ServerError
-from app.model import user, project
-from app.model.base import db
-from app.settings import config
+from pm_cms.extensions import migrate, dropzone
+from pm_cms.libs.core import JSONEncoder
+from pm_cms.libs.error import APIException
+from pm_cms.libs.error_code import ServerError
+from pm_cms.model import user, project
+from pm_cms.model.base import db
+from pm_cms.settings import config
 
 
 def read_yaml(yaml_file_path):
@@ -60,12 +60,12 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    from app.blueprint import pm_bp
+    from pm_cms.blueprint import pm_bp
     app.register_blueprint(pm_bp)
 
 
 def register_redprints(app):
-    from app.api.v01 import create_blueprint_v1
+    from pm_cms.api.v01 import create_blueprint_v1
     app.register_blueprint(create_blueprint_v1(), url_prefix="/v1")
 
 
@@ -104,5 +104,5 @@ def register_logging(app):
 
 
 def register_commands(app):
-    from app.commands import register_init_commands
+    from pm_cms.commands import register_init_commands
     register_init_commands(app)

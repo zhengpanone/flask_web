@@ -13,8 +13,8 @@ from decimal import Decimal
 
 from flask import jsonify
 
-from app.libs.redprint import RedPrint
-from app.model.response import ResMsg
+from pm_cms.libs.redprint import RedPrint
+from pm_cms.model.response import ResMsg
 
 api = RedPrint('project')
 

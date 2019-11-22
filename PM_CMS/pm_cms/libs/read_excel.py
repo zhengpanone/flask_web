@@ -10,7 +10,7 @@ date:2019/10/31 15:11
 # import lib
 import xlrd
 
-from app.model.project import Project
+from pm_cms.model.project import Project
 
 
 def read_excel(excel_path):

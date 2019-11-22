@@ -14,7 +14,7 @@ import uuid
 
 from flask.json import JSONEncoder as _JSONEncoder
 
-from app.libs.error_code import ServerError
+from pm_cms.libs.error_code import ServerError
 
 
 class JSONEncoder(_JSONEncoder):

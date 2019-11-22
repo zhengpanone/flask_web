@@ -13,12 +13,12 @@ from collections import namedtuple
 from flask import current_app, jsonify, request
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired
 
-from app.libs.enums import ClientTypeEnum
-from app.libs.error_code import AuthFailed, Forbidden
-from app.libs.redprint import RedPrint
-from app.libs.scope import is_in_scope
-from app.model.user import User
-from app.validators.forms import ClientForm
+from pm_cms.libs.enums import ClientTypeEnum
+from pm_cms.libs.error_code import AuthFailed, Forbidden
+from pm_cms.libs.redprint import RedPrint
+from pm_cms.libs.scope import is_in_scope
+from pm_cms.model.user import User
+from pm_cms.validators.forms import ClientForm
 
 api = RedPrint('token')
 

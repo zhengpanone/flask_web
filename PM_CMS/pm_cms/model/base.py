@@ -13,7 +13,7 @@ from datetime import datetime
 
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
 
-from app.libs.error_code import NotFound
+from pm_cms.libs.error_code import NotFound
 
 
 class SQLAlchemy(_SQLAlchemy):

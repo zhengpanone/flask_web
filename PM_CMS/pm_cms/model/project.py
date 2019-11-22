@@ -10,18 +10,18 @@ date:2019/9/6 10:00
 # import lib
 from enum import Enum
 
-from app.model.base import Base, db
+from pm_cms.model.base import Base, db
 
 
-class SeqPlatform(Enum):
-    NOVASEQ = 1
-    MISEQ = 2
-    XTEN = 3
+
 
 
 class Type(Enum):
     HEALTH = 0  # 健康
     SCIENTIFIC = 1  # 科研
+
+
+
 
 
 tags = db.Table('project_tag',
@@ -41,20 +41,18 @@ class Project(Base):
     library_name = db.Column(db.String(80), comment="文库号")
     nucleic_name = db.Column(db.String(80), comment="核酸编号")
     library_type = db.Column(db.String(80), comment="文库类型")
-    pooling_name = db.Column(db.String(80), comment="pooling单")
+
     index_i5 = db.Column(db.String(80), comment="I5 index")
     index_i5_name = db.Column(db.String(80), comment="I5 index name")
     index_i7 = db.Column(db.String(80), comment="I7 index")
     index_i7_name = db.Column(db.String(80), comment="I7 index name")
     library_is_true = db.Column(db.Boolean, default=False, comment="文库是否合格")
 
-    seq_platform = db.Column(db.Integer, comment="测序平台")
     seq_type = db.Column(db.String(80), comment="测序策略")
     p_type = db.Column(db.Integer, comment="项目类型")
 
     lane = db.Column(db.String(80), comment="上机lane")
     output = db.Column(db.String(80), comment="数据产出")
-    outsourcing_business = db.Column(db.Boolean, default=False, comment="是否外包")
 
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'), comment="分析类型ID")
 

@@ -11,7 +11,7 @@ date:2019/9/29 9:43
 from flask import g
 from flask_httpauth import HTTPBasicAuth
 
-from app.api.v01.token import verify_auth_token
+from pm_cms.api.v01.token import verify_auth_token
 
 auth = HTTPBasicAuth()
 

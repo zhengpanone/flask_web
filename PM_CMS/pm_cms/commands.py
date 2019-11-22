@@ -10,8 +10,8 @@ date:2019/9/6 9:19
 # import lib
 import click
 
-from app.libs import read_excel
-from app.model.base import db
+from pm_cms.libs import read_excel
+from pm_cms.model.base import db
 
 
 def register_init_commands(app):

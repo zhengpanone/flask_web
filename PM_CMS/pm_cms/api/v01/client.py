@@ -9,11 +9,11 @@ date:2019/9/27 15:19
 
 # import lib
 
-from app.libs.enums import ClientTypeEnum
-from app.libs.error_code import Success
-from app.libs.redprint import RedPrint
-from app.model.user import User
-from app.validators.forms import ClientForm, UserEmailForm
+from pm_cms.libs.enums import ClientTypeEnum
+from pm_cms.libs.error_code import Success
+from pm_cms.libs.redprint import RedPrint
+from pm_cms.model.user import User
+from pm_cms.validators.forms import ClientForm, UserEmailForm
 
 api = RedPrint('client')
 

@@ -11,8 +11,8 @@ date:2019/9/27 15:37
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app.libs.error_code import NotFound, AuthFailed
-from app.model.base import Base, db
+from pm_cms.libs.error_code import NotFound, AuthFailed
+from pm_cms.model.base import Base, db
 
 
 class User(Base):

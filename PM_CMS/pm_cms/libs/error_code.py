@@ -9,7 +9,7 @@ date:2019/9/27 16:53
 
 # import lib
 
-from app.libs.error import APIException
+from pm_cms.libs.error import APIException
 
 
 class Success(APIException):
@@ -38,7 +38,7 @@ class ClientTypeError(APIException):
 
 class ParameterException(APIException):
     code = 400
-    msg = 'parameter is error'
+    msg = 'invalid parameter'
     error_code = 1000
 
 

@@ -10,11 +10,11 @@ date:2019/9/29 9:37
 # import lib
 from flask import jsonify, g
 
-from app.libs.error_code import DeleteSuccess, AuthFailed
-from app.libs.redprint import RedPrint
-from app.libs.token_auth import auth
-from app.model.base import db
-from app.model.user import User
+from pm_cms.libs.error_code import DeleteSuccess, AuthFailed
+from pm_cms.libs.redprint import RedPrint
+from pm_cms.libs.token_auth import auth
+from pm_cms.model.base import db
+from pm_cms.model.user import User
 
 api = RedPrint('user')
 

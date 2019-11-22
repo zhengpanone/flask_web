@@ -11,9 +11,9 @@ date:2019/9/27 15:25
 from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired, length, Email, Regexp, ValidationError
 
-from app.libs.enums import ClientTypeEnum
-from app.model.user import User
-from app.validators.base import BaseForm as Form
+from pm_cms.libs.enums import ClientTypeEnum
+from pm_cms.model.user import User
+from pm_cms.validators.base import BaseForm as Form
 
 
 class ClientForm(Form):

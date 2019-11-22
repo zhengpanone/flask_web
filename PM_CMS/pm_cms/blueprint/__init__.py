@@ -12,4 +12,4 @@ date:2019/9/27 14:25
 from flask import Blueprint
 
 pm_bp = Blueprint('views', __name__)
-from app.blueprint import views
+from pm_cms.blueprint import views
