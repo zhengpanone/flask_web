@@ -10,7 +10,7 @@ date:2019/10/22 21:29
 # import lib
 from flask import request, current_app
 
-from pm_cms.model.code import ResponseCode, ResponseMessage
+from pm_cms.libs.code import ResponseCode
 
 
 class ResMsg:

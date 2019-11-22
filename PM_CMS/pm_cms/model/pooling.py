@@ -8,24 +8,21 @@ date:2019/11/21 10:53
 """
 
 # import lib
-from enum import Enum
 
 from pm_cms.model.base import Base, db
 
 
-class IsOutSourceEnum(Enum):
-    YES = 1
-    NO = 0
-
-
-class SeqPlatformEnum(Enum):
-    NOVASEQ = 1
-    MISEQ = 2
-    XTEN = 3
-
-
 class Pooling(Base):
     pooling_name = db.Column(db.String(80), comment="pooling单")
-    outsourcing_business = db.Column(db.Boolean, default=False, comment="是否外包")
+    is_outsource = db.Column(db.Boolean, default=False, comment="是否外包")
     seq_platform = db.Column(db.Integer, comment="测序平台")
-    projects = db.relationship('Project', back_populates='pooling')
+    projects = db.relationship('Project', backref='pooling')
+
+    @staticmethod
+    def add_pooling(pooling_name, is_outsource, seq_platform):
+        with db.auto_commit():
+            pooling = Pooling()
+            pooling.pooling_name = pooling_name
+            pooling.is_outsource = is_outsource
+            pooling.seq_platform = seq_platform
+            db.session.add(pooling)

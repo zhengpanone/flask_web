@@ -8,21 +8,9 @@ date:2019/9/6 10:00
 """
 
 # import lib
-from enum import Enum
+from sqlalchemy import ForeignKey
 
 from pm_cms.model.base import Base, db
-
-
-
-
-
-class Type(Enum):
-    HEALTH = 0  # 健康
-    SCIENTIFIC = 1  # 科研
-
-
-
-
 
 tags = db.Table('project_tag',
                 db.Column('project_id', db.Integer, db.ForeignKey('project.id'), primary_key=True),
@@ -33,6 +21,8 @@ tags = db.Table('project_tag',
 class Project(Base):
     contract_name = db.Column(db.String(80), comment="合同名称")
     contract_num = db.Column(db.String(80), comment="合同编号")
+
+    pooling_id = db.Column(db.Integer, ForeignKey('pooling.id'), comment='pooling单ID')
 
     project_name = db.Column(db.String(80), comment="任务单名称")
     project_num = db.Column(db.String(80), comment="项目编号")
@@ -54,16 +44,9 @@ class Project(Base):
     lane = db.Column(db.String(80), comment="上机lane")
     output = db.Column(db.String(80), comment="数据产出")
 
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), comment="分析类型ID")
-
     tags = db.relationship('Tag', secondary=tags,
                            backref=db.backref('projects', lazy='dynamic'))
 
 
 class Tag(Base):
     name = db.Column(db.String(80), comment="标签名")
-
-
-class Category(Base):
-    name = db.Column(db.String(80), comment="分析类型")
-    projects = db.relationship("Project", back_populates='category')

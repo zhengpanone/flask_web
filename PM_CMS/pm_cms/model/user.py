@@ -21,9 +21,6 @@ class User(Base):
     auth = db.Column(db.SmallInteger, default=1, comment="用户角色")
     _password = db.Column('password', db.String(120), comment="密码")
 
-    def keys(self):
-        return 'id', 'email', 'nickname'
-
     @property
     def password(self):
         return self._password
@@ -33,7 +30,7 @@ class User(Base):
         self._password = generate_password_hash(raw)
 
     @staticmethod
-    def register_by_email(nickname, account, secret, ):
+    def register_by_email(nickname, account, secret):
         with db.auto_commit():
             user = User()
             user.nickname = nickname
@@ -43,6 +40,12 @@ class User(Base):
 
     @staticmethod
     def verify(email, password):
+        """
+        校验邮箱密码是否正确
+        :param email:       邮箱
+        :param password:    密码
+        :return: {'uid':'id','scope':'scope'}
+        """
         user = User.query.filter_by(email=email).first_or_404(description="user not found")
         if not user:
             raise NotFound(msg="user not found")
@@ -52,6 +55,11 @@ class User(Base):
         return {'uid': user.id, 'scope': scope}
 
     def check_password(self, raw):
+        """
+        校验密码是否正确
+        :param raw:
+        :return:
+        """
         if not self._password:
             return False
         return check_password_hash(self._password, raw)

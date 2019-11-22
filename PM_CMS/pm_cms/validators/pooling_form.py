@@ -11,8 +11,8 @@ date:2019/11/21 11:06
 from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired
 
-from pm_cms.form.base import BaseForm
-from pm_cms.model.pooling import IsOutSourceEnum, SeqPlatformEnum
+from pm_cms.validators.base import BaseForm
+from pm_cms.libs.enums import IsOutSourceEnum, SeqPlatformEnum
 
 
 class PoolingForm(BaseForm):
@@ -20,16 +20,16 @@ class PoolingForm(BaseForm):
     is_outsource = IntegerField(validators=[DataRequired(message="外包为1, 不外包为0")])
     seq_platform = IntegerField(validators=[DataRequired(message="测序平台 Novaseq为1,Miseq为2,Xten为3")])
 
-    def validate_is_outsourcing(self, value):
+    def validate_is_outsource(self, value):
         try:
-            is_outsource = IsOutSourceEnum(value.data)
+            IsOutSourceEnum(value.data)
         except ValueError as e:
             raise e
-        self.is_outsource.data = is_outsource
+        self.is_outsource.data = value.data
 
     def validate_seq_platform(self, value):
         try:
-            seq_platform = SeqPlatformEnum(value.data)
+            SeqPlatformEnum(value.data)
         except ValueError as e:
             raise e
-        self.seq_platform = seq_platform
+        self.seq_platform.data = value.data

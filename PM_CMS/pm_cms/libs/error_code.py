@@ -44,7 +44,7 @@ class ParameterException(APIException):
 
 class NotFound(APIException):
     code = 404
-    msg = ''
+    msg = '未找到'
     error_code = 1001
 
 

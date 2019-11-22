@@ -10,7 +10,6 @@ date:2019/9/27 17:20
 # import lib
 from flask import request
 from wtforms import Form
-
 from pm_cms.libs.error_code import ParameterException
 
 

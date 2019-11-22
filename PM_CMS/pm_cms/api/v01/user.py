@@ -10,13 +10,42 @@ date:2019/9/29 9:37
 # import lib
 from flask import jsonify, g
 
-from pm_cms.libs.error_code import DeleteSuccess, AuthFailed
+from pm_cms.libs.enums import ClientTypeEnum
+from pm_cms.libs.error_code import DeleteSuccess, AuthFailed, Success
 from pm_cms.libs.redprint import RedPrint
 from pm_cms.libs.token_auth import auth
 from pm_cms.model.base import db
 from pm_cms.model.user import User
+from pm_cms.validators.user_form import ClientForm, UserEmailForm
 
 api = RedPrint('user')
+
+
+@api.route('/register', methods=['POST'])
+def register_by_client_type():
+    """
+    根据客户端种类进行注册
+    :return:
+    """
+    # request.args.to_dict()
+    form = ClientForm().validate_for_api()
+    promise = {
+        ClientTypeEnum.USER_EMAIL: __register_user_by_email,
+        ClientTypeEnum.USER_MINA: __register_user_by_mina
+    }
+    promise[form.type.data]()
+    return Success()
+
+
+def __register_user_by_email():
+    form = UserEmailForm().validate_for_api()
+    User.register_by_email(form.nickname.data,
+                           form.account.data,
+                           form.secret.data)
+
+
+def __register_user_by_mina():
+    pass
 
 
 @api.route('/<int:uid>', methods=['GET'])

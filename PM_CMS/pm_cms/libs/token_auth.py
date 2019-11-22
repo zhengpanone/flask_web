@@ -14,6 +14,12 @@ from flask_httpauth import HTTPBasicAuth
 from pm_cms.api.v01.token import verify_auth_token
 
 auth = HTTPBasicAuth()
+"""
+通过header进行传递用户名密码
+key为 Authorization
+value为 basic base64(name:password)
+base64(name:password) 为编码后的字符串
+"""
 
 
 @auth.verify_password
