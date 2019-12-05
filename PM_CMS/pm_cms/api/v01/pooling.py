@@ -18,6 +18,7 @@ api = RedPrint('pooling')
 
 @api.route('/', methods=['POST'])
 def index():
+   
     form = PoolingForm().validate_for_api()
 
     pooling_name = form.pooling_name.data

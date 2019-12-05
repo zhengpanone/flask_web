@@ -24,6 +24,8 @@ def index():
     res = ResMsg()
     test_dict = dict(name="张三", age=18)
     res.update(data=test_dict)
+    for i in range(10):
+        print(i)
     return jsonify(res.data)
 
 

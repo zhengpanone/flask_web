@@ -14,6 +14,7 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy, BaseQuery
 
 from pm_cms.libs.error_code import NotFound
+from pm_cms.model.mixin import ReprMixin
 
 
 class SQLAlchemy(_SQLAlchemy):
@@ -49,7 +50,7 @@ class Query(BaseQuery):
 db = SQLAlchemy(query_class=Query)
 
 
-class Base(db.Model):
+class Base(db.Model, ReprMixin):
     __abstract__ = True
     id = db.Column(db.Integer, primary_key=True, comment="ID")
     create_time = db.Column(db.Integer, comment="创建时间")

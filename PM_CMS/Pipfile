@@ -19,6 +19,7 @@ xlrd = "*"
 coverage = "*"
 flask-dropzone = "*"
 flask-wtf = "*"
+flasgger = "*"
 
 [requires]
 python_version = "3.6"
