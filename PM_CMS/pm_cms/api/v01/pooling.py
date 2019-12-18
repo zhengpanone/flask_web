@@ -18,7 +18,6 @@ api = RedPrint('pooling')
 
 @api.route('/', methods=['POST'])
 def index():
-   
     form = PoolingForm().validate_for_api()
 
     pooling_name = form.pooling_name.data
@@ -26,3 +25,8 @@ def index():
     seq_platform = form.seq_platform.data
     Pooling.add_pooling(pooling_name, is_outsource, seq_platform)
     return Success(msg="pooling单添加成功")
+
+
+@api.route('/test')
+def test():
+    return "test"

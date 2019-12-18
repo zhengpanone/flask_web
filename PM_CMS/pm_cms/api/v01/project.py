@@ -15,11 +15,13 @@ from flask import jsonify
 
 from pm_cms.libs.redprint import RedPrint
 from pm_cms.libs.response import ResMsg
+from flasgger import swag_from
 
 api = RedPrint('project')
 
 
 @api.route("/")
+@swag_from('project.yml')
 def index():
     res = ResMsg()
     test_dict = dict(name="张三", age=18)

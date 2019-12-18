@@ -15,7 +15,7 @@ import yaml
 from flask import Flask
 from werkzeug.exceptions import HTTPException
 
-from pm_cms.extensions import migrate, dropzone
+from pm_cms.extensions import migrate, dropzone, swagger
 from pm_cms.libs.core import JSONEncoder
 from pm_cms.libs.error import APIException
 from pm_cms.libs.error_code import ServerError
@@ -57,6 +57,7 @@ def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
     dropzone.init_app(app)
+    swagger.init_app(app)
 
 
 def register_blueprints(app):

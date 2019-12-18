@@ -11,7 +11,9 @@ date:2019/9/6 9:12
 from flask_dropzone import Dropzone
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flasgger import Swagger
 
 db = SQLAlchemy()
 migrate = Migrate()
 dropzone = Dropzone()
+swagger = Swagger()
